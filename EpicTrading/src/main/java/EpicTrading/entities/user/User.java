@@ -41,7 +41,7 @@ public class User implements UserDetails {
 	private String password;
 	private int balance;
 	private String phoneNumber;
-	@OneToMany
+	@OneToMany(mappedBy = "user")
 	private List<Transaction> transaction;
 	@Enumerated(EnumType.STRING)
 	private Role role;
