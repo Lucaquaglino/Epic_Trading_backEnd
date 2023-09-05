@@ -10,6 +10,7 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -30,9 +31,21 @@ public class Transaction {
 	private String currency;
 	@Enumerated(EnumType.STRING)
 	private TransactionType TransactionType;
+
 	@ManyToOne
+	@JoinColumn(name = "user_id")
 	private User user;
+
 	@OneToOne
 	private Order order;
 
+	public Transaction(LocalDate timeStamp, double amount, String currency, TransactionType transactionType,
+			Order order) {
+
+		this.timeStamp = timeStamp;
+		this.amount = amount;
+		this.currency = currency;
+		this.TransactionType = transactionType;
+		this.order = order;
+	}
 }

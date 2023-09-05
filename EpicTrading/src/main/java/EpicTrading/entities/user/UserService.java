@@ -17,7 +17,7 @@ public class UserService {
 
 	// SALVA NUOVO UTENTE + ECCEZIONE SE VIENE USATA LA STESSA EMAIL
 	public User save(NewUserPayload body) {
-		uR.findByEmail(body.getEmail()).ifPresent(utente -> {
+		uR.findByEmail(body.getEmail()).ifPresent(user -> {
 			throw new BadRequestException("L'email " + body.getEmail() + " è gia stata utilizzata");
 		});
 		User newUser = new User(body.getUsername(), body.getName(), body.getSurname(), body.getEmail(),

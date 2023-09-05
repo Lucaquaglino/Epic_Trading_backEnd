@@ -1,5 +1,6 @@
 package EpicTrading.entities.user;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -42,7 +43,7 @@ public class User implements UserDetails {
 	private int balance;
 	private String phoneNumber;
 	@OneToMany(mappedBy = "user")
-	private List<Transaction> transaction;
+	private List<Transaction> transaction = new ArrayList<>();
 	@Enumerated(EnumType.STRING)
 	private Role role;
 

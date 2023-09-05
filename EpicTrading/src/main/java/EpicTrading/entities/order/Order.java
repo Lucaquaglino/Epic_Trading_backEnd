@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 import EpicTrading.entities.MarketData.MarketData;
-import EpicTrading.entities.transaction.Transaction;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -19,7 +18,19 @@ import lombok.NoArgsConstructor;
 @Table(name = "orders")
 @Data
 @NoArgsConstructor
+
 public class Order {
+
+	public Order(LocalDate timeStamp, int quantity, OrderType orderType, MarketData marketData) {
+		super();
+
+		this.timeStamp = timeStamp;
+		this.quantity = quantity;
+		OrderType = orderType;
+		this.marketData = marketData;
+
+	}
+
 	@Id
 	@GeneratedValue
 	private UUID id;
@@ -30,6 +41,5 @@ public class Order {
 	private OrderType OrderType;
 	@OneToOne
 	private MarketData marketData;
-	@OneToOne
-	private Transaction transaction;
+
 }

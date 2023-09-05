@@ -3,11 +3,9 @@ package EpicTrading.entities.MarketData;
 import java.time.LocalDate;
 import java.util.UUID;
 
-import EpicTrading.entities.order.Order;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,6 +23,5 @@ public class MarketData {
 	private double price;
 	private double volume;
 	private LocalDate timeStamp;
-	@OneToOne
-	private Order order;
+
 }
