@@ -26,7 +26,7 @@ public class UserService {
 	}
 
 	// TORNA LA LISTA DEGLI UTENTI
-	public List<User> getUsers() {
+	public List<User> getAllUsers() {
 		return uR.findAll();
 	}
 
