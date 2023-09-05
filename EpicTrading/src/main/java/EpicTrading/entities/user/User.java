@@ -10,11 +10,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import EpicTrading.entities.transaction.Transaction;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -39,7 +41,8 @@ public class User implements UserDetails {
 	private String password;
 	private int balance;
 	private String phoneNumber;
-//	private List<Transaction> transaction;
+	@OneToMany
+	private List<Transaction> transaction;
 	@Enumerated(EnumType.STRING)
 	private Role role;
 
