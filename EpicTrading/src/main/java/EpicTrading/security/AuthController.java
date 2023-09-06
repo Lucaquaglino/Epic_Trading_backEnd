@@ -36,6 +36,7 @@ public class AuthController {
 
 		body.setPassword(bcrypt.encode(body.getPassword()));
 		User created = uS.save(body);
+
 		return created;
 	}
 

@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import EpicTrading.entities.PortfolioStock.PortfolioStock;
 import EpicTrading.entities.transaction.Transaction;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -46,6 +47,8 @@ public class User implements UserDetails {
 	private List<Transaction> transaction = new ArrayList<>();
 	@Enumerated(EnumType.STRING)
 	private Role role;
+	@OneToMany
+	private List<PortfolioStock> portfolioStock = new ArrayList<>();
 
 	public User(String username, String name, String surname, String email, String password, Role role) {
 

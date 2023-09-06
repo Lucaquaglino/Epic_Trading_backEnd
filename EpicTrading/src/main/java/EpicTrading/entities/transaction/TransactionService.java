@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import EpicTrading.entities.MarketData.MarketData;
 import EpicTrading.entities.MarketData.MarketDataRepository;
+import EpicTrading.entities.PortfolioStock.PortfolioStock;
+import EpicTrading.entities.PortfolioStock.PortfolioStockRepository;
 import EpicTrading.entities.order.Order;
 import EpicTrading.entities.order.OrderRepository;
 import EpicTrading.entities.user.User;
@@ -22,6 +24,8 @@ public class TransactionService {
 	@Autowired
 	private UserService uS;
 
+	@Autowired
+	private PortfolioStockRepository portfolioStockRepository;
 	@Autowired
 	private UserRepository userRepository;
 	@Autowired
@@ -232,6 +236,24 @@ public class TransactionService {
 
 			order = orderRepository.save(order);
 			newTransaction.setOrder(order);
+			// 4. Crea l'oggetto PortfolioStock
+			PortfolioStock portfolioStock = new PortfolioStock();
+			portfolioStock.setMarketData(marketData);
+			portfolioStock.setQuantity(body.getOrder().getQuantity());
+			portfolioStock.setPurchasePrice(marketData.getPrice());
+			portfolioStock.setIdUser(uS.getCurrentUser().getId()); // Assegna l'ID dell'utente all'oggetto
+																	// PortfolioStock
+
+			// Aggiungi l'oggetto PortfolioStock alla lista dell'utente
+			User currentUser = uS.getCurrentUser();
+			currentUser.getPortfolioStock().add(portfolioStock);
+
+			// 5. Salva il PortfolioStock nel repository
+			portfolioStock = portfolioStockRepository.save(portfolioStock);
+
+			// Aggiorna l'oggetto User nel repository
+			userRepository.save(currentUser);
+
 		} else {
 			// Se il tipo di transazione è DEPOSIT o WITHDRAW, usa l'importo fornito nel
 			// payload
