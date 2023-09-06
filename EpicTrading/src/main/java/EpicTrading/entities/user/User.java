@@ -40,7 +40,7 @@ public class User implements UserDetails {
 	private String surname;
 	private String email;
 	private String password;
-	private int balance;
+	private double balance;
 	private String phoneNumber;
 	@OneToMany
 	private List<Transaction> transaction = new ArrayList<>();

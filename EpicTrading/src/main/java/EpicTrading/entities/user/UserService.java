@@ -1,6 +1,7 @@
 package EpicTrading.entities.user;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import EpicTrading.entities.transaction.Transaction;
 import EpicTrading.exceptions.BadRequestException;
 import EpicTrading.exceptions.NotFoundException;
 
@@ -46,25 +48,40 @@ public class UserService {
 		return uR.save(found);
 	}
 
-//	public User findByIdAndUpdateTransactions(UUID id, Transaction newTransaction) throws NotFoundException {
-//		User user = uR.findById(id).orElseThrow(() -> new NotFoundException(id));
-//
-//		// Aggiungi la nuova fattura all'array di fatture del cliente
-//		user.getTransaction().add(newTransaction);
-//
-//		// Salva il cliente aggiornato nel repository
-//		return uR.save(user);
-//	}
-//
+	public User findByIdAndUpdateTransactions(UUID id, Transaction newTransaction) throws NotFoundException {
+		User user = uR.findById(id).orElseThrow(() -> new NotFoundException(id));
+
+		// Imposta l'utente sulla nuova transazione
+//		newTransaction.setUserId(user.getId());
+
+		// Aggiungi la nuova fattura all'array di fatture del cliente
+		user.getTransaction().add(newTransaction);
+
+		// Salva il cliente aggiornato nel repository
+		return uR.save(user);
+	}
+
 	// PRENDI L'ID DELL'UTENTE LOGGATO
+//	public User getCurrentUser() {
+//		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//		String currentUserName = authentication.getName();
+//		List<User> users = uR.findUsersByName(currentUserName);
+//		if (users.isEmpty()) {
+//			throw new NotFoundException("Utente con nome " + currentUserName + " non trovato");
+//		}
+//		return users.get(0); // Restituisci il primo utente trovato (potrebbe esserci solo uno)
+//	}
+
 	public User getCurrentUser() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String currentUserName = authentication.getName();
-		List<User> users = uR.findUsersByName(currentUserName);
-		if (users.isEmpty()) {
+		Optional<User> user = uR.findByName(currentUserName);
+
+		if (user.isPresent()) {
+			return user.get();
+		} else {
 			throw new NotFoundException("Utente con nome " + currentUserName + " non trovato");
 		}
-		return users.get(0); // Restituisci il primo utente trovato (potrebbe esserci solo uno)
 	}
 
 	// CERCA E CANCELLA UTENTE TRAMITE ID

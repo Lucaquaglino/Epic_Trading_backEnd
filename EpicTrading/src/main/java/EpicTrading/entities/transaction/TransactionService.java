@@ -9,6 +9,7 @@ import EpicTrading.entities.MarketData.MarketData;
 import EpicTrading.entities.MarketData.MarketDataRepository;
 import EpicTrading.entities.order.Order;
 import EpicTrading.entities.order.OrderRepository;
+import EpicTrading.entities.user.User;
 import EpicTrading.entities.user.UserRepository;
 import EpicTrading.entities.user.UserService;
 
@@ -128,49 +129,149 @@ public class TransactionService {
 //		return tR.findById(id).orElseThrow(() -> new NotFoundException(id));
 //	}
 
-	public Transaction createTransaction(NewTransactionWithOrderPayload body) {
-		// Creazione dell'oggetto MarketData (potresti ottenere questi dati da qualche
-		// altra parte)
-		MarketData marketData = new MarketData();
-		marketData.setPrice(body.getOrder().getMarketData().getPrice());
+//	public Transaction createTransaction(NewTransactionWithOrderPayload body) {
+//		// 1. Crea e salva l'oggetto MarketData
+//		MarketData marketData = new MarketData();
 //		marketData.setPrice(body.getOrder().getMarketData().getPrice());
-		// Salva l'oggetto MarketData nel repository
-		marketData = marketDataRepository.save(marketData);
+//		marketData = marketDataRepository.save(marketData);
+//
+//		// 2. Crea e salva l'oggetto Order
+//		Order order = new Order();
+//		order.setMarketData(marketData);
+//		order.setOrderType(body.getOrder().getOrderType());
+//		order = orderRepository.save(order);
+//
+//		// 3. Crea e salva l'oggetto Transaction
+//		Transaction newTransaction = new Transaction();
+//		newTransaction.setTimeStamp(body.getTimeStamp());
+//		newTransaction.setAmount(body.getAmount());
+//		newTransaction.setCurrency(body.getCurrency());
+//		newTransaction.setTransactionType(body.getTransactionType());
+//		newTransaction.setOrder(order);
+//		newTransaction.setUserId(uS.getCurrentUser().getId());
+//
+//		// Salva la Transaction nel repository
+//		newTransaction = tR.save(newTransaction);
+//
+//		// Aggiungi la nuova Transaction all'array delle transazioni dell'utente
+//		User currentUser = uS.getCurrentUser();
+//		currentUser.getTransaction().add(newTransaction);
+//
+//		handleTransactionAndBalance(newTransaction, currentUser);
+//
+//		// Salva l'utente aggiornato nel repository
+//		userRepository.save(currentUser);
+//
+//		return newTransaction;
+//	}
 
-		// Creazione dell'oggetto Order
-		Order order = new Order();
-		order.setMarketData(marketData); // Collega l'oggetto MarketData all'ordine
-		order.setOrderType(body.getOrder().getOrderType());
-		// Altre operazioni relative all'ordine, se necessario
+//	public Transaction createTransaction(NewTransactionWithOrderPayload body) {
+//		// 1. Crea e salva l'oggetto Transaction
+//		Transaction newTransaction = new Transaction();
+//		newTransaction.setTimeStamp(body.getTimeStamp());
+//		newTransaction.setAmount(body.getAmount());
+//		newTransaction.setCurrency(body.getCurrency());
+//		newTransaction.setTransactionType(body.getTransactionType());
+//		newTransaction.setUserId(uS.getCurrentUser().getId());
+//
+//		if (body.getTransactionType() != TransactionType.DEPOSIT
+//				&& body.getTransactionType() != TransactionType.WITHDRAW) {
+//			// Se il tipo di transazione non è DEPOSIT o WITHDRAW, crea e collega l'oggetto
+//			// MarketData e Order
+//			MarketData marketData = new MarketData();
+//			marketData.setPrice(body.getOrder().getMarketData().getPrice());
+//			marketData = marketDataRepository.save(marketData);
+//
+//			Order order = new Order();
+//			order.setMarketData(marketData);
+//			order.setOrderType(body.getOrder().getOrderType());
+//			order = orderRepository.save(order);
+//
+//			newTransaction.setOrder(order);
+//		}
+//
+//		// Salva la Transaction nel repository
+//		newTransaction = tR.save(newTransaction);
+//
+//		// Aggiungi la nuova Transaction all'array delle transazioni dell'utente
+//		User currentUser = uS.getCurrentUser();
+//		currentUser.getTransaction().add(newTransaction);
+//
+//		handleTransactionAndBalance(newTransaction, currentUser);
+//
+//		// Salva l'utente aggiornato nel repository
+//		userRepository.save(currentUser);
+//
+//		return newTransaction;
+//	}
 
-		// Salva l'ordine nel repository
-		order = orderRepository.save(order);
-
-		// Creazione dell'oggetto Transaction
+	public Transaction createTransaction(NewTransactionWithOrderPayload body) {
+		// 1. Crea e salva l'oggetto Transaction
 		Transaction newTransaction = new Transaction();
 		newTransaction.setTimeStamp(body.getTimeStamp());
-		newTransaction.setAmount(body.getAmount());
 		newTransaction.setCurrency(body.getCurrency());
 		newTransaction.setTransactionType(body.getTransactionType());
-		newTransaction.setOrder(order); // Collega l'oggetto Order alla transazione
 		newTransaction.setUserId(uS.getCurrentUser().getId());
-//		// Collega l'utente alla transazione
-//		User user = uS.findById(body.getUserId());
-//		if (user == null) {
-//			// Gestisci il caso in cui l'utente non esiste nel database
-//		} else {
-//			// Collega l'utente alla transazione
-//			newTransaction.setUser(user);
-//			// Salva la transazione nel repository
 
-//		}
+		// Verifica se il tipo di transazione richiede di calcolare l'importo
+		if (body.getTransactionType() != TransactionType.DEPOSIT
+				&& body.getTransactionType() != TransactionType.WITHDRAW) {
+			// 2. Crea e collega l'oggetto MarketData
+			MarketData marketData = new MarketData();
+			marketData.setPrice(body.getOrder().getMarketData().getPrice());
+			marketData = marketDataRepository.save(marketData);
 
-		// Aggiornamento dati cliente
-//		uS.findByIdAndUpdateTransactions(body.getUserId(), newTransaction);
-		// Salva la transazione nel repository
+			// 3. Crea e collega l'oggetto Order
+			Order order = new Order();
+			order.setMarketData(marketData);
+			order.setOrderType(body.getOrder().getOrderType());
+			order.setQuantity(body.getOrder().getQuantity());
+			// Calcola l'importo
+			double amount = marketData.getPrice() * order.getQuantity();
+			newTransaction.setAmount(amount);
 
-		return tR.save(newTransaction);
+			order = orderRepository.save(order);
+			newTransaction.setOrder(order);
+		} else {
+			// Se il tipo di transazione è DEPOSIT o WITHDRAW, usa l'importo fornito nel
+			// payload
+			newTransaction.setAmount(body.getAmount());
+		}
 
+		// Salva la Transaction nel repository
+		newTransaction = tR.save(newTransaction);
+
+		// Aggiungi la nuova Transaction all'array delle transazioni dell'utente
+		User currentUser = uS.getCurrentUser();
+		currentUser.getTransaction().add(newTransaction);
+
+		handleTransactionAndBalance(newTransaction, currentUser);
+
+		// Salva l'utente aggiornato nel repository
+		userRepository.save(currentUser);
+
+		return newTransaction;
+	}
+
+// condizione per aumento o diminuzione balance user
+	private void handleTransactionAndBalance(Transaction newTransaction, User currentUser) {
+		if (newTransaction.getTransactionType() == TransactionType.BUY
+				|| newTransaction.getTransactionType() == TransactionType.SELL
+				|| newTransaction.getTransactionType() == TransactionType.WITHDRAW) {
+			double newBalance = currentUser.getBalance() - newTransaction.getAmount();
+
+			// Verifica se il saldo diventerebbe negativo
+			if (newBalance < 0) {
+//	            throw new Exception("Saldo insufficiente per completare la transazione");
+			}
+
+			// Altrimenti, modifica il saldo dell'utente
+			currentUser.setBalance(newBalance);
+		} else if (newTransaction.getTransactionType() == TransactionType.DEPOSIT) {
+			// Se la transazione è di tipo DEPOSIT, aggiungi l'importo al saldo dell'utente
+			double newBalance = currentUser.getBalance() + newTransaction.getAmount();
+			currentUser.setBalance(newBalance);
+		}
 	}
 
 	public List<Transaction> getAllTransactions() {
