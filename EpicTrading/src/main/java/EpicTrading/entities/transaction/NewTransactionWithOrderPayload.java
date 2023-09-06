@@ -1,9 +1,9 @@
 package EpicTrading.entities.transaction;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 import EpicTrading.entities.order.Order;
+import EpicTrading.entities.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,5 +20,5 @@ public class NewTransactionWithOrderPayload {
 	private TransactionType TransactionType;
 
 	private Order order;
-	private UUID userId;
+	private User user;
 }

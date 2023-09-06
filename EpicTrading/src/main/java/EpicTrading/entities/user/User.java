@@ -42,7 +42,7 @@ public class User implements UserDetails {
 	private String password;
 	private int balance;
 	private String phoneNumber;
-	@OneToMany(mappedBy = "user")
+	@OneToMany
 	private List<Transaction> transaction = new ArrayList<>();
 	@Enumerated(EnumType.STRING)
 	private Role role;

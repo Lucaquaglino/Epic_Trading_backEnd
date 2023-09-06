@@ -30,11 +30,11 @@ public class SecurityConfig {
 
 		http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 		http.addFilterBefore(corsFilter, JWTAuthFilter.class);
-		http.authorizeHttpRequests(auth -> auth.requestMatchers("/auth/**").permitAll());
 
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/orders/**").authenticated());
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/transactions/**").authenticated());
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/users/**").authenticated());
+		http.authorizeHttpRequests(auth -> auth.requestMatchers("/auth/**").permitAll());
 		return http.build();
 	}
 

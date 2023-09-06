@@ -23,7 +23,7 @@ public class MarketDataRunner implements CommandLineRunner {
 		Faker faker = new Faker();
 		List<MarketData> marketDataDb = marketDataRepository.findAll();
 		if (marketDataDb.isEmpty()) {
-			for (int i = 0; i < 100; i++) {
+			for (int i = 0; i < 2; i++) {
 				MarketData marketData = new MarketData();
 				marketData.setName(faker.company().name());
 				marketData.setSymbol(faker.stock().nsdqSymbol());
