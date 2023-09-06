@@ -1,34 +1,32 @@
 package EpicTrading.entities.MarketData;
 
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Service;
 
+@Service
 public class MarketDataService {
 
 	@Autowired
 	private MarketDataRepository marketDataRepository;
 
-	@Scheduled(cron = "0/10 * * * *") // Specifica l'intervallo di 60 secondi
+//	@Scheduled(fixedRate = 10000) // Esegui ogni 10 secondi
 	public void updateMarketDataPrices() {
+		List<MarketData> marketDataList = marketDataRepository.findAll();
+		Random random = new Random();
 
-		List<MarketData> allMarketData = marketDataRepository.findAll();
+		for (MarketData data : marketDataList) {
+			double currentPrice = data.getPrice();
+			double percentageChange = (random.nextDouble() - 0.5) * 0.1; // Cambio percentuale casuale tra -5% e +5%
+			double newPrice = currentPrice * (1 + percentageChange);
 
-		for (MarketData marketData : allMarketData) {
-			double newPrice = 3;// Scrivi qui la logica per ottenere il nuovo prezzo
-			marketData.setPrice(newPrice);
+			data.setPrice(newPrice);
+			marketDataRepository.save(data);
 		}
 
-		// Salva le modifiche nel repository
-		marketDataRepository.saveAll(allMarketData);
-	}
-
-	// Altri metodi del servizio per gestire operazioni relative ai MarketData
-	@Scheduled(cron = "0/10 * * * *") // Specifica l'intervallo di 60 secondi
-	public void updateMarketDataPrice(MarketData marketData, double newPrice) {
-		marketData.setPrice(newPrice);
-		marketDataRepository.save(marketData); // Salva l'oggetto con il nuovo prezzo nel database
+		System.out.println("Parametro 'price' aggiornato per tutte le istanze di MarketData...");
 	}
 
 }
