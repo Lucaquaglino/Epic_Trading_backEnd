@@ -22,20 +22,20 @@ public class MarketDataRunner implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		Faker faker = new Faker();
 		List<MarketData> marketDataDb = marketDataRepository.findAll();
-		if (marketDataDb.isEmpty()) {
-			for (int i = 0; i < 2; i++) {
-				MarketData marketData = new MarketData();
-				marketData.setName(faker.company().name());
-				marketData.setSymbol(faker.stock().nsdqSymbol());
-				marketData.setPrice(faker.number().randomDouble(2, 10, 1000)); // Prezzo casuale tra 10 e 1000 con 2
+//		if (marketDataDb.isEmpty()) {
+		for (int i = 0; i < 200; i++) {
+			MarketData marketData = new MarketData();
+			marketData.setName(faker.company().name());
+			marketData.setSymbol(faker.stock().nsdqSymbol());
+			marketData.setPrice(faker.number().randomDouble(2, 10, 1000)); // Prezzo casuale tra 10 e 1000 con 2
+																			// decimali
+			marketData.setVolume(faker.number().randomDouble(2, 100, 10000)); // Volume casuale tra 100 e 10000 con
+																				// 2
 																				// decimali
-				marketData.setVolume(faker.number().randomDouble(2, 100, 10000)); // Volume casuale tra 100 e 10000 con
-																					// 2
-																					// decimali
-				marketData.setTimeStamp(LocalDate.now().minusDays(i)); // Data attuale meno i giorni
+			marketData.setTimeStamp(LocalDate.now().minusDays(i)); // Data attuale meno i giorni
 
-				marketDataRepository.save(marketData);
-			}
+			marketDataRepository.save(marketData);
 		}
 	}
 }
+//}

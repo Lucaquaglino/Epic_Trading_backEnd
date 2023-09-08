@@ -78,8 +78,7 @@ public class UserService {
 
 		if (principal instanceof User) {
 			User user = (User) principal;
-			String currentUserName = user.getName(); // Supponendo che "name" sia il campo corretto per il nome
-														// dell'utente
+			String currentUserName = user.getName();
 			Optional<User> userOptional = uR.findByName(currentUserName);
 
 			if (userOptional.isPresent()) {

@@ -35,6 +35,7 @@ public class SecurityConfig {
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/transactions/**").authenticated());
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/users/**").authenticated());
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/auth/**").permitAll());
+		http.authorizeHttpRequests(auth -> auth.requestMatchers("/marketData/**").permitAll());
 		return http.build();
 	}
 
