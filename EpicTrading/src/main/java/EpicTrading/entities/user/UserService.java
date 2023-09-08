@@ -74,14 +74,20 @@ public class UserService {
 
 	public User getCurrentUser() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String currentUserName = authentication.getName();
-		Optional<User> user = uR.findByName(currentUserName);
+		Object principal = authentication.getPrincipal();
 
-		if (user.isPresent()) {
-			return user.get();
-		} else {
-			throw new NotFoundException("Utente con nome " + currentUserName + " non trovato");
+		if (principal instanceof User) {
+			User user = (User) principal;
+			String currentUserName = user.getName(); // Supponendo che "name" sia il campo corretto per il nome
+														// dell'utente
+			Optional<User> userOptional = uR.findByName(currentUserName);
+
+			if (userOptional.isPresent()) {
+				return userOptional.get();
+			}
 		}
+
+		throw new NotFoundException("Utente non trovato");
 	}
 
 	// CERCA E CANCELLA UTENTE TRAMITE ID
