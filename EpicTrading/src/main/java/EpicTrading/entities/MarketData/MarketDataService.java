@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,7 +17,7 @@ public class MarketDataService {
 	@Autowired
 	private MarketDataRepository marketDataRepository;
 
-//	@Scheduled(fixedRate = 10000) // Esegui ogni 10 secondi
+	@Scheduled(fixedRate = 10000) // Esegui ogni 10 secondi
 	public void updateMarketDataPrices() {
 		List<MarketData> marketDataList = marketDataRepository.findAll();
 		Random random = new Random();
