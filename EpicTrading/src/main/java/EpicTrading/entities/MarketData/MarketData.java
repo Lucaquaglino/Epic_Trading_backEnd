@@ -1,19 +1,23 @@
 package EpicTrading.entities.MarketData;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
+import EpicTrading.entities.HistoricalPrice.HistoricalPrice;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "MarketData")
 @Data
-@NoArgsConstructor
+@AllArgsConstructor
 public class MarketData {
 	@Id
 	@GeneratedValue
@@ -24,4 +28,10 @@ public class MarketData {
 	private double volume;
 	private LocalDate timeStamp;
 
+	@OneToMany
+	private List<HistoricalPrice> historicalPrices;
+
+	public MarketData() {
+		this.historicalPrices = new ArrayList<>();
+	}
 }
