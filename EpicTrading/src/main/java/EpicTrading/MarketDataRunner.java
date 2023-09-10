@@ -38,9 +38,9 @@ public class MarketDataRunner implements CommandLineRunner {
 			marketData.setName(faker.company().name());
 			marketData.setSymbol(faker.stock().nsdqSymbol());
 
-			// Converti il prezzo in una stringa con il punto come separatore decimale
-			String priceString = String.format(Locale.US, "%.2f", faker.number().randomDouble(2, 10, 1000));
-			marketData.setPrice(Double.parseDouble(priceString)); // Converte nuovamente in double
+//			// Converti il prezzo in una stringa con il punto come separatore decimale
+//			String priceString = String.format(Locale.US, "%.2f", faker.number().randomDouble(2, 10, 1000));
+//			marketData.setPrice(Double.parseDouble(priceString)); // Converte nuovamente in double
 
 			marketData.setVolume(faker.number().randomDouble(2, 100, 10000)); // Volume casuale tra 100 e 10000 con 2
 																				// decimali
@@ -49,7 +49,7 @@ public class MarketDataRunner implements CommandLineRunner {
 			marketDataRepository.save(marketData);
 			for (int f = 0; f < 2; f++) {
 				HistoricalPrice historicalPrice = new HistoricalPrice();
-				historicalPrice.setDateTime(LocalDateTime.now().minusDays(i));
+				historicalPrice.setDateTime(LocalDateTime.now().minusDays(f));
 				historicalPrice.setIdMarketData(marketData.getId());
 
 				hPR.save(historicalPrice);
@@ -75,6 +75,7 @@ public class MarketDataRunner implements CommandLineRunner {
 				}
 
 				hPR.save(historicalPrice);
+				marketData.setPrice(historicalPrice.getPrice());
 			}
 
 			marketDataRepository.save(marketData);
