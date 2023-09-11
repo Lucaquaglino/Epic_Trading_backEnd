@@ -9,16 +9,18 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "orders")
 @Data
 @NoArgsConstructor
-
+@Table(name = "orders", indexes = {
+		@Index(name = "uk_glmm3bvnot7joswv497j7ne64", columnList = "market_data_id", unique = false) })
 public class Order {
 
 	public Order(LocalDate timeStamp, int quantity, OrderType orderType, MarketData marketData) {
@@ -40,6 +42,7 @@ public class Order {
 	@Enumerated(EnumType.STRING)
 	private OrderType OrderType;
 	@OneToOne
+	@JoinColumn(name = "market_data_id", unique = false)
 	private MarketData marketData;
 
 }

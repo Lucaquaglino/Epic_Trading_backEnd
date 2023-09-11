@@ -2,6 +2,7 @@ package EpicTrading.entities.MarketData;
 
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,6 +11,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+
+import EpicTrading.exceptions.NotFoundException;
 
 @Service
 public class MarketDataService {
@@ -41,9 +44,15 @@ public class MarketDataService {
 		Pageable pageable = PageRequest.of(page, 100, Sort.by(sort));
 		return marketDataRepository.findAll(pageable);
 	}
-}
+
+// CERCA UTENTE TRAMITE ID
+	public MarketData findById(UUID id) throws NotFoundException {
+		return marketDataRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
+	}
 
 //	public Page<MarketData> findAll(int page, String sort) {
 //		Pageable pageable = PageRequest.of(page, 10, Sort.by(sort));
 //		return tR.findAll(pageable);
 //	}
+
+}

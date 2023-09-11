@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import EpicTrading.entities.MarketData.MarketData;
 import EpicTrading.entities.MarketData.MarketDataRepository;
+import EpicTrading.entities.MarketData.MarketDataService;
 import EpicTrading.entities.PortfolioStock.PortfolioStock;
 import EpicTrading.entities.PortfolioStock.PortfolioStockRepository;
 import EpicTrading.entities.order.Order;
@@ -34,6 +35,9 @@ public class TransactionService {
 	private UserRepository userRepository;
 	@Autowired
 	private OrderRepository orderRepository;
+
+	@Autowired
+	private MarketDataService mS;
 
 	@Autowired
 	private MarketDataRepository marketDataRepository;
@@ -213,6 +217,77 @@ public class TransactionService {
 //		return newTransaction;
 //	}
 
+//	public Transaction createTransaction(NewTransactionWithOrderPayload body) {
+//		// 1. Crea e salva l'oggetto Transaction
+//		Transaction newTransaction = new Transaction();
+//		newTransaction.setTimeStamp(body.getTimeStamp());
+//		newTransaction.setCurrency(body.getCurrency());
+//		newTransaction.setTransactionType(body.getTransactionType());
+//		newTransaction.setUserId(uS.getCurrentUser().getId());
+//
+//		// Verifica se il tipo di transazione richiede di calcolare l'importo
+//		if (body.getTransactionType() != TransactionType.DEPOSIT
+//				&& body.getTransactionType() != TransactionType.WITHDRAW) {
+//			// 2. Crea e collega l'oggetto MarketData
+//			MarketData marketData = new MarketData();
+//			marketData.setPrice(body.getOrder().getMarketData().getPrice());
+//			marketData = marketDataRepository.save(marketData);
+//
+////			UUID marketDataId = body.getOrder().getMarketData().getId();
+////			MarketData marketData = marketDataRepository.findById(marketDataId).orElseThrow();
+////			marketData.setPrice(body.getOrder().getMarketData().getPrice());
+////			marketData = marketDataRepository.save(marketData);
+//
+//			// 3. Crea e collega l'oggetto Order
+//			Order order = new Order();
+//			order.setMarketData(marketData);
+//			order.setOrderType(body.getOrder().getOrderType());
+//			order.setQuantity(body.getOrder().getQuantity());
+//			// Calcola l'importo
+//			double amount = marketData.getPrice() * order.getQuantity();
+//			newTransaction.setAmount(amount);
+//
+//			order = orderRepository.save(order);
+//			newTransaction.setOrder(order);
+//			// 4. Crea l'oggetto PortfolioStock
+//			PortfolioStock portfolioStock = new PortfolioStock();
+//			portfolioStock.setMarketData(marketData);
+//			portfolioStock.setQuantity(body.getOrder().getQuantity());
+//			portfolioStock.setPurchasePrice(marketData.getPrice());
+//			portfolioStock.setIdUser(uS.getCurrentUser().getId()); // Assegna l'ID dell'utente all'oggetto
+//																	// PortfolioStock
+//
+//			// Aggiungi l'oggetto PortfolioStock alla lista dell'utente
+//			User currentUser = uS.getCurrentUser();
+//			currentUser.getPortfolioStock().add(portfolioStock);
+//
+//			// 5. Salva il PortfolioStock nel repository
+//			portfolioStock = portfolioStockRepository.save(portfolioStock);
+//
+//			// Aggiorna l'oggetto User nel repository
+//			userRepository.save(currentUser);
+//
+//		} else {
+//			// Se il tipo di transazione è DEPOSIT o WITHDRAW, usa l'importo fornito nel
+//			// payload
+//			newTransaction.setAmount(body.getAmount());
+//		}
+//
+//		// Salva la Transaction nel repository
+//		newTransaction = tR.save(newTransaction);
+//
+//		// Aggiungi la nuova Transaction all'array delle transazioni dell'utente
+//		User currentUser = uS.getCurrentUser();
+//		currentUser.getTransaction().add(newTransaction);
+//
+//		handleTransactionAndBalance(newTransaction, currentUser);
+//
+//		// Salva l'utente aggiornato nel repository
+//		userRepository.save(currentUser);
+//
+//		return newTransaction;
+//	}
+
 	public Transaction createTransaction(NewTransactionWithOrderPayload body) {
 		// 1. Crea e salva l'oggetto Transaction
 		Transaction newTransaction = new Transaction();
@@ -225,9 +300,17 @@ public class TransactionService {
 		if (body.getTransactionType() != TransactionType.DEPOSIT
 				&& body.getTransactionType() != TransactionType.WITHDRAW) {
 			// 2. Crea e collega l'oggetto MarketData
-			MarketData marketData = new MarketData();
-			marketData.setPrice(body.getOrder().getMarketData().getPrice());
+			MarketData marketData = mS.findById(body.getMarketdata().getId());
+			marketData.setPrice(marketData.getPrice());
+			marketData.setSymbol(marketData.getSymbol());
+			marketData.setVolume(marketData.getVolume());
+			marketData.setName(marketData.getName());
 			marketData = marketDataRepository.save(marketData);
+
+//			UUID marketDataId = body.getOrder().getMarketData().getId();
+//			MarketData marketData = marketDataRepository.findById(marketDataId).orElseThrow();
+//			marketData.setPrice(body.getOrder().getMarketData().getPrice());
+//			marketData = marketDataRepository.save(marketData);
 
 			// 3. Crea e collega l'oggetto Order
 			Order order = new Order();

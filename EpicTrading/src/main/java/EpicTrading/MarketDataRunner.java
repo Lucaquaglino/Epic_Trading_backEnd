@@ -1,30 +1,39 @@
-package EpicTrading;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
-
-import EpicTrading.entities.HistoricalPrice.HistoricalPriceRepository;
-import EpicTrading.entities.MarketData.MarketDataRepository;
-import EpicTrading.entities.Timestamp.TimestampRepository;
-
-@Component
-public class MarketDataRunner implements CommandLineRunner {
-
-	@Autowired
-	private MarketDataRepository marketDataRepository;
-
-	@Autowired
-	private HistoricalPriceRepository hPR;
-	@Autowired
-	private TimestampRepository tR;
-
-	@Override
-	public void run(String... args) throws Exception {
+//package EpicTrading;
+//
+//import java.time.LocalDateTime;
+//import java.util.List;
+//import java.util.Locale;
+//
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.boot.CommandLineRunner;
+//import org.springframework.stereotype.Component;
+//
+//import com.github.javafaker.Faker;
+//
+//import EpicTrading.entities.HistoricalPrice.HistoricalPrice;
+//import EpicTrading.entities.HistoricalPrice.HistoricalPriceRepository;
+//import EpicTrading.entities.MarketData.MarketData;
+//import EpicTrading.entities.MarketData.MarketDataRepository;
+//import EpicTrading.entities.Timestamp.Timestamp;
+//import EpicTrading.entities.Timestamp.TimestampRepository;
+//
+//@Component
+//public class MarketDataRunner implements CommandLineRunner {
+//
+//	@Autowired
+//	private MarketDataRepository marketDataRepository;
+//
+//	@Autowired
+//	private HistoricalPriceRepository hPR;
+//	@Autowired
+//	private TimestampRepository tR;
+//
+//	@Override
+//	public void run(String... args) throws Exception {
 //		Faker faker = new Faker(new Locale("en-US")); // Imposta la locale su "en-US"
 //		List<MarketData> marketDataDb = marketDataRepository.findAll();
 ////		if (marketDataDb.isEmpty()) {
-//		for (int i = 0; i < 2; i++) {
+//		for (int i = 0; i < 50; i++) {
 //			MarketData marketData = new MarketData();
 //			marketData.setName(faker.company().name());
 //			marketData.setSymbol(faker.stock().nsdqSymbol());
@@ -72,18 +81,17 @@ public class MarketDataRunner implements CommandLineRunner {
 //			marketDataRepository.save(marketData);
 //		}
 //	}
+//
+////	List<HistoricalPrice> historicalPrices = hPR.findAll();
+////
+////	for(int i = 0;i<200;i++) {
+////		HistoricalPrice historicalPrice = new HistoricalPrice();
+////		historicalPrice.setDateTime(LocalDateTime.now().minusDays(i));
+////historicalPrice.setMarketData(marketData);
+////		
+////
+////	
+////	}
+////
+//
 //}
-
-//	List<HistoricalPrice> historicalPrices = hPR.findAll();
-//
-//	for(int i = 0;i<200;i++) {
-//		HistoricalPrice historicalPrice = new HistoricalPrice();
-//		historicalPrice.setDateTime(LocalDateTime.now().minusDays(i));
-//historicalPrice.setMarketData(marketData);
-//		
-//
-//	
-//	}
-//
-	}
-}

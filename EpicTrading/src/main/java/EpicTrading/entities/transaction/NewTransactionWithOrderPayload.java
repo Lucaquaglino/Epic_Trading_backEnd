@@ -1,7 +1,9 @@
 package EpicTrading.entities.transaction;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
+import EpicTrading.entities.MarketData.MarketData;
 import EpicTrading.entities.order.Order;
 import EpicTrading.entities.user.User;
 import lombok.AllArgsConstructor;
@@ -21,4 +23,6 @@ public class NewTransactionWithOrderPayload {
 
 	private Order order;
 	private User user;
+	private MarketData marketdata;
+	private UUID marketDataId;
 }

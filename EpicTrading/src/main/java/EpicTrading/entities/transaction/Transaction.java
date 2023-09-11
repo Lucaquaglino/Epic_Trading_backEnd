@@ -3,6 +3,7 @@ package EpicTrading.entities.transaction;
 import java.time.LocalDate;
 import java.util.UUID;
 
+import EpicTrading.entities.MarketData.MarketData;
 import EpicTrading.entities.order.Order;
 import EpicTrading.entities.user.User;
 import jakarta.persistence.Entity;
@@ -36,6 +37,9 @@ public class Transaction {
 
 	@OneToOne
 	private Order order;
+
+	@OneToOne
+	private MarketData marketData;
 
 	public Transaction(LocalDate timeStamp, double amount, String currency, TransactionType transactionType,
 			Order order, User user, UUID userId) {
