@@ -1,10 +1,13 @@
 package EpicTrading.entities.user;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,6 +36,24 @@ public class UserController {
 //	@PreAuthorize("hasRole('ADMIN')")
 	public List<User> getUsers() {
 		return uS.getAllUsers();
+	}
+
+	@GetMapping("/current")
+	public ResponseEntity<Map<String, String>> getCurrentUser() {
+		User user = uS.getCurrentUser();
+
+		if (user != null) {
+			Map<String, String> userInfo = new HashMap<>();
+			userInfo.put("name", user.getName());
+			userInfo.put("email", user.getEmail());
+			userInfo.put("surname", user.getSurname());
+			userInfo.put("username", user.getUsername());
+			userInfo.put("balance", Double.toString(user.getBalance()));
+			userInfo.put("phoneNumber", user.getPhoneNumber());
+			return ResponseEntity.ok(userInfo);
+		}
+
+		return ResponseEntity.notFound().build();
 	}
 
 	@GetMapping("/{userId}")
