@@ -29,9 +29,6 @@ public class PortfolioStock {
 
 	private int quantity;
 
-	private double purchasePrice; // Aggiunto il prezzo di acquisto
+	private double purchasePrice;
 
-	// Getter e setter per gli attributi
-
-	// Altri metodi per gestire il PortfolioItem
 }
