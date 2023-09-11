@@ -1,8 +1,6 @@
 package EpicTrading.entities.user;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,19 +36,30 @@ public class UserController {
 		return uS.getAllUsers();
 	}
 
+//	@GetMapping("/current")
+//	public ResponseEntity<Map<String, String>> getCurrentUser() {
+//		User user = uS.getCurrentUser();
+//
+//		if (user != null) {
+//			Map<String, String> userInfo = new HashMap<>();
+//			userInfo.put("name", user.getName());
+//			userInfo.put("email", user.getEmail());
+//			userInfo.put("surname", user.getSurname());
+//			userInfo.put("username", user.getUsername());
+//			userInfo.put("balance", Double.toString(user.getBalance()));
+//			userInfo.put("phoneNumber", user.getPhoneNumber());
+//			return ResponseEntity.ok(userInfo);
+//		}
+//
+//		return ResponseEntity.notFound().build();
+//	}
+
 	@GetMapping("/current")
-	public ResponseEntity<Map<String, String>> getCurrentUser() {
+	public ResponseEntity<User> getCurrentUser() {
 		User user = uS.getCurrentUser();
 
 		if (user != null) {
-			Map<String, String> userInfo = new HashMap<>();
-			userInfo.put("name", user.getName());
-			userInfo.put("email", user.getEmail());
-			userInfo.put("surname", user.getSurname());
-			userInfo.put("username", user.getUsername());
-			userInfo.put("balance", Double.toString(user.getBalance()));
-			userInfo.put("phoneNumber", user.getPhoneNumber());
-			return ResponseEntity.ok(userInfo);
+			return ResponseEntity.ok(user);
 		}
 
 		return ResponseEntity.notFound().build();
