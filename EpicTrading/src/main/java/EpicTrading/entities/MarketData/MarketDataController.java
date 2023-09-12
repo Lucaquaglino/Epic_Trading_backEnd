@@ -1,8 +1,11 @@
 package EpicTrading.entities.MarketData;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,11 +32,12 @@ public class MarketDataController {
 			@RequestParam(defaultValue = "id") String order) {
 		return mS.getAllMarketData(page, order);
 	}
+
 //
-//	@GetMapping("/{orderId}")
-//	public Order findById(@PathVariable UUID orderId) {
-//		return oS.getOrderById(orderId);
-//	}
+	@GetMapping("/{userId}")
+	public MarketData findById(@PathVariable UUID userId) {
+		return mS.findById(userId);
+	}
 //
 //	@PutMapping("/{userId}")
 //	public User updateUser(@PathVariable UUID userId, @RequestBody NewUserPayload body) {
