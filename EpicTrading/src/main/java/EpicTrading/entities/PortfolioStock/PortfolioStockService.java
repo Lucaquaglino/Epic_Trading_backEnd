@@ -21,7 +21,7 @@ public class PortfolioStockService {
 //	}
 
 	public Page<PortfolioStock> findByUserId(int page, String sort, UUID userId) {
-		Pageable pageable = PageRequest.of(page, 20, Sort.by(sort));
+		Pageable pageable = PageRequest.of(page, 60, Sort.by(sort));
 		return pR.findByUserId(userId, pageable);
 	}
 
