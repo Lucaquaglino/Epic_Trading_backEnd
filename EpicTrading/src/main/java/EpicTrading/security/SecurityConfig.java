@@ -37,6 +37,7 @@ public class SecurityConfig {
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/auth/**").permitAll());
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/marketData/**").permitAll());
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/portfolioStock/**").permitAll());
+		http.authorizeHttpRequests(auth -> auth.requestMatchers("/historicalPrice/**").permitAll());
 		return http.build();
 	}
 
