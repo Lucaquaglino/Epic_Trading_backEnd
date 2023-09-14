@@ -1,6 +1,7 @@
 package EpicTrading.entities.transaction;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -392,4 +393,8 @@ public class TransactionService {
 		return tR.findAll();
 	}
 
+	public Page<Transaction> findByUserId(int page, String sort, UUID userId) {
+		Pageable pageable = PageRequest.of(page, 60, Sort.by(sort));
+		return tR.findByUserId(userId, pageable);
+	}
 }
