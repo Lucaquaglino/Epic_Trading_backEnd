@@ -45,6 +45,8 @@ public class UserService {
 		found.setName(body.getName());
 		found.setSurname(body.getSurname());
 		found.setEmail(body.getEmail());
+		found.setPhoneNumber(body.getPhoneNumber());
+		found.setUsername(body.getUsername());
 		return uR.save(found);
 	}
 
