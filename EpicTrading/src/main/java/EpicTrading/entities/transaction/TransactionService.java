@@ -477,7 +477,7 @@ public class TransactionService {
 	}
 
 	public Page<Transaction> findByUserId(int page, String sort, UUID userId) {
-		Pageable pageable = PageRequest.of(page, 60, Sort.by(sort));
+		Pageable pageable = PageRequest.of(page, 90, Sort.by(sort));
 		return tR.findByUserId(userId, pageable);
 	}
 }
