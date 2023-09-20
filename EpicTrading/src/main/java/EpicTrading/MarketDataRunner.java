@@ -47,7 +47,7 @@
 ////			marketData.setTimeStamp(LocalDate.now().minusDays(i)); // Data attuale meno i giorni
 //
 //			marketDataRepository.save(marketData);
-//			for (int f = 0; f < 2; f++) {
+//			for (int f = 0; f < 20; f++) {
 //				HistoricalPrice historicalPrice = new HistoricalPrice();
 //				historicalPrice.setDateTime(LocalDateTime.now().minusDays(f));
 //				historicalPrice.setIdMarketData(marketData.getId());

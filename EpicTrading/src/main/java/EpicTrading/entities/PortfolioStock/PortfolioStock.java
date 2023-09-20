@@ -1,5 +1,6 @@
 package EpicTrading.entities.PortfolioStock;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import EpicTrading.entities.MarketData.MarketData;
@@ -28,7 +29,7 @@ public class PortfolioStock {
 	private MarketData marketData;
 
 	private int quantity;
-
+	private LocalDateTime timestamp;
 	private double purchasePrice;
 
 }

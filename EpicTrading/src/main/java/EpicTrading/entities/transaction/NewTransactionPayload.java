@@ -20,4 +20,5 @@ public class NewTransactionPayload {
 	private TransactionType TransactionType;
 	private NewOrderPayload order;
 	private UUID userId;
+	private UUID portfolioStockID;
 }

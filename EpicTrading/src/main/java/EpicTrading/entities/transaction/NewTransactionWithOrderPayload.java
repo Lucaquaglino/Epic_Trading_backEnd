@@ -25,4 +25,5 @@ public class NewTransactionWithOrderPayload {
 	private User user;
 	private MarketData marketdata;
 	private UUID marketDataId;
+	private UUID portfolioStockId;
 }
