@@ -1,6 +1,6 @@
 package EpicTrading.entities.transaction;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import EpicTrading.entities.MarketData.MarketData;
@@ -25,7 +25,7 @@ public class Transaction {
 	@Id
 	@GeneratedValue
 	private UUID id;
-	private LocalDate timeStamp;
+	private LocalDateTime timeStamp;
 	private double amount;
 	private String currency;
 	@Enumerated(EnumType.STRING)
@@ -41,7 +41,7 @@ public class Transaction {
 	@OneToOne
 	private MarketData marketData;
 
-	public Transaction(LocalDate timeStamp, double amount, String currency, TransactionType transactionType,
+	public Transaction(LocalDateTime timeStamp, double amount, String currency, TransactionType transactionType,
 			Order order, User user, UUID userId) {
 
 		this.timeStamp = timeStamp;

@@ -1,6 +1,6 @@
 package EpicTrading.entities.transaction;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import EpicTrading.entities.MarketData.MarketData;
@@ -15,7 +15,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class NewTransactionWithOrderPayload {
 
-	private LocalDate timeStamp;
+	private LocalDateTime timeStamp;
 	private double amount;
 	private String currency;
 

@@ -322,6 +322,7 @@ public class TransactionService {
 			order.setMarketData(marketData);
 			order.setOrderType(body.getOrder().getOrderType());
 			order.setQuantity(body.getOrder().getQuantity());
+			order.setTimeStamp(body.getOrder().getTimeStamp());
 			// Calcola l'importo
 			double amount = marketData.getPrice() * order.getQuantity();
 			newTransaction.setAmount(amount);
@@ -409,6 +410,7 @@ public class TransactionService {
 			order.setMarketData(marketData);
 			order.setOrderType(OrderType.SELL);
 			order.setQuantity(portfolioStock.getQuantity());
+			order.setTimeStamp(body.getOrder().getTimeStamp());
 			order = orderRepository.save(order);
 			newTransaction.setOrder(order);
 			// Aggiungi il guadagno o la perdita al saldo dell'utente

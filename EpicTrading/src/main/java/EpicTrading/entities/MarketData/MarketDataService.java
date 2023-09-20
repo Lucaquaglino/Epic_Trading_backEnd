@@ -41,7 +41,7 @@ public class MarketDataService {
 //		return marketDataRepository.findAll();
 //	}
 	public Page<MarketData> getAllMarketData(int page, String sort) {
-		Pageable pageable = PageRequest.of(page, 100, Sort.by(sort));
+		Pageable pageable = PageRequest.of(page, 20, Sort.by(sort));
 		return marketDataRepository.findAll(pageable);
 	}
 
