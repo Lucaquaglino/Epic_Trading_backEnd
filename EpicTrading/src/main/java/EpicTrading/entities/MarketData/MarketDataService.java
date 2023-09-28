@@ -45,7 +45,7 @@ public class MarketDataService {
 		return marketDataRepository.findAll(pageable);
 	}
 
-// CERCA UTENTE TRAMITE ID
+// CERCA MarketDATA TRAMITE ID
 	public MarketData findById(UUID id) throws NotFoundException {
 		return marketDataRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
 	}

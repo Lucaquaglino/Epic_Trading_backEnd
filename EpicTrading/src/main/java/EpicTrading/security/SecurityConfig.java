@@ -33,11 +33,11 @@ public class SecurityConfig {
 
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/orders/**").authenticated());
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/transactions/**").authenticated());
-		http.authorizeHttpRequests(auth -> auth.requestMatchers("/users/**").permitAll());
+		http.authorizeHttpRequests(auth -> auth.requestMatchers("/users/**").authenticated());
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/auth/**").permitAll());
-		http.authorizeHttpRequests(auth -> auth.requestMatchers("/marketData/**").permitAll());
-		http.authorizeHttpRequests(auth -> auth.requestMatchers("/portfolioStock/**").permitAll());
-		http.authorizeHttpRequests(auth -> auth.requestMatchers("/historicalPrice/**").permitAll());
+		http.authorizeHttpRequests(auth -> auth.requestMatchers("/marketData/**").authenticated());
+		http.authorizeHttpRequests(auth -> auth.requestMatchers("/portfolioStock/**").authenticated());
+		http.authorizeHttpRequests(auth -> auth.requestMatchers("/historicalPrice/**").authenticated());
 		return http.build();
 	}
 
