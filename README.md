@@ -3,7 +3,7 @@ EpicTrading App v1.0
 
 <img src="https://res.cloudinary.com/dohzyvzxv/image/upload/v1695863064/Acquisizione_schermata_28.09.2023_alle_03.03.09_psdch7.png" alt="" style="height: 50px; width:200px">
 
-Backend Repository Link: https://github.com/Lucaquaglino/Epic_Trading_backEnd
+Frontend Repository Link: https://github.com/Lucaquaglino/Epic_Trading_FrontEnd
    
 
 Benvenuti all'applicazione di trading! Questa applicazione è stata sviluppata utilizzando Angular, Bootstrap, Java, Spring Boot e PostgreSQL e offre una piattaforma completa per il trading di azioni. Di seguito sono descritte le principali funzionalità e istruzioni per l'installazione e l'esecuzione.
@@ -115,7 +115,7 @@ ENG VERSION
 
 EpicTrading App v1.0
 
-Backend Repository Link: https://github.com/Lucaquaglino/Epic_Trading_backEnd
+Frontend Repository Link: https://github.com/Lucaquaglino/Epic_Trading_FrontEnd
 
 Welcome to the EpicTrading application! This application has been developed using Angular, Bootstrap, Java, Spring Boot, and PostgreSQL, providing a comprehensive platform for stock trading. Below are the key features and instructions for installation and usage.
 
