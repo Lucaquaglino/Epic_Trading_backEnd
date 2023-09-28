@@ -80,6 +80,14 @@ Buon trading! 📈📊🚀
 
 
 
+
+------------------------------------------
+
+
+
+
+
+
 ENG VERSION
 
 EpicTrading App v1.0
