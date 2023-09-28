@@ -1,7 +1,9 @@
 
 EpicTrading App v1.0
 
-Frontend Repository Link: https://github.com/Lucaquaglino/Epic_Trading_FrontEnd
+<img src="https://res.cloudinary.com/dohzyvzxv/image/upload/v1695863064/Acquisizione_schermata_28.09.2023_alle_03.03.09_psdch7.png" alt="" style="height: 50px; width:200px">
+
+Backend Repository Link: https://github.com/Lucaquaglino/Epic_Trading_backEnd
    
 
 Benvenuti all'applicazione di trading! Questa applicazione è stata sviluppata utilizzando Angular, Bootstrap, Java, Spring Boot e PostgreSQL e offre una piattaforma completa per il trading di azioni. Di seguito sono descritte le principali funzionalità e istruzioni per l'installazione e l'esecuzione.
@@ -10,20 +12,48 @@ Benvenuti all'applicazione di trading! Questa applicazione è stata sviluppata u
 L'applicazione di trading è progettata per consentire agli utenti di eseguire operazioni di trading, monitorare il saldo del proprio conto, visualizzare le azioni di loro proprietà e analizzare le tendenze di mercato.
 Ecco un riepilogo delle principali pagine e funzionalità:
 
-    Landing Page: Una pagina introduttiva che descrive l'applicazione e le sue funzionalità.
+   Landing Page: Una pagina introduttiva che descrive l'applicazione e le sue funzionalità.
 
-    Pagina di Login e Registrazione: Gli utenti possono accedere o registrarsi per un nuovo account utilizzando questa pagina.
+<img src="https://res.cloudinary.com/dohzyvzxv/image/upload/v1695862027/Acquisizione_schermata_28.09.2023_alle_02.45.56_rixzep.png" alt="" style="height: 400px; width:800px">
+ 
+   Pagina di Login e Registrazione: Gli utenti possono accedere o registrarsi per un nuovo account utilizzando questa pagina.
 
-    Dashboard: Dopo l'accesso, gli utenti possono visualizzare la dashboard che include i seguenti dati:
+
+
+<img src="https://res.cloudinary.com/dohzyvzxv/image/upload/v1695862936/Acquisizione_schermata_28.09.2023_alle_03.01.55_w2ot4u.png" alt="" style="height: 400px; width:800px">
+
+
+   Dashboard: Dopo l'accesso, gli utenti possono visualizzare la dashboard che include i seguenti dati:
         Saldo del conto
         Elenco delle azioni di proprietà
         Storico delle transazioni effettuate
 
-    Pagina del Mercato: Qui gli utenti possono visualizzare l'elenco delle azioni disponibili per l'acquisto. Possono anche effettuare acquisti di azioni da questa pagina.
 
-    Pagina dell'Analista di Mercato: Gli utenti possono selezionare una specifica azione e visualizzare un grafico delle tendenze dei prezzi nel tempo. Questa pagina include anche dati storici sui prezzi e strumenti di analisi.
+<img src="https://res.cloudinary.com/dohzyvzxv/image/upload/v1695862534/Acquisizione_schermata_28.09.2023_alle_02.55.09_mlkd8e.png" alt="" style="height: 400px; width:800px">
 
-    Pagina di Deposito: Gli utenti possono depositare fondi nel proprio conto utilizzando la simulazione con sandbox di PayPal. Questa pagina offre un metodo sicuro per aggiungere denaro al saldo del conto.
+
+   Pagina del Mercato: Qui gli utenti possono visualizzare l'elenco delle azioni disponibili per l'acquisto. Possono anche effettuare acquisti di azioni da questa pagina.
+
+
+
+<img src="https://res.cloudinary.com/dohzyvzxv/image/upload/v1695862353/Acquisizione_schermata_28.09.2023_alle_02.52.08_f3wvsh.png" alt="" style="height: 400px; width:800px">
+
+
+   Pagina dell'Analista di Mercato: Gli utenti possono selezionare una specifica azione e visualizzare un grafico delle tendenze dei prezzi nel tempo. Questa pagina include anche dati storici sui prezzi e strumenti di analisi.
+
+
+
+<img src="https://res.cloudinary.com/dohzyvzxv/image/upload/v1695862819/Acquisizione_schermata_28.09.2023_alle_02.59.58_mbhepr.png" alt="" style="height: 400px; width:800px">
+
+
+   Pagina di Deposito: Gli utenti possono depositare fondi nel proprio conto utilizzando la simulazione con sandbox di PayPal. Questa pagina offre un metodo sicuro per aggiungere denaro al saldo del conto.
+
+
+
+
+<img src="https://res.cloudinary.com/dohzyvzxv/image/upload/v1695862733/Acquisizione_schermata_28.09.2023_alle_02.58.37_cqjpeu.png" alt="" style="height: 400px; width:800px">
+
+
 
 Installazione
 
@@ -78,21 +108,14 @@ Per domande o assistenza, contatta luca.quaglino@hotmail.com
 Buon trading! 📈📊🚀
 
 
-
-
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
 
 
 ENG VERSION
 
 EpicTrading App v1.0
 
-Frontend Repository Link: https://github.com/Lucaquaglino/Epic_Trading_FrontEnd
+Backend Repository Link: https://github.com/Lucaquaglino/Epic_Trading_backEnd
 
 Welcome to the EpicTrading application! This application has been developed using Angular, Bootstrap, Java, Spring Boot, and PostgreSQL, providing a comprehensive platform for stock trading. Below are the key features and instructions for installation and usage.
 
@@ -156,3 +179,5 @@ Technologies Used
 For questions or assistance, contact luca.quaglino@hotmail.com.
 
 Happy trading! 📈📊🚀
+
+
