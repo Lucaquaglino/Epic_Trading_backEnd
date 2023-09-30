@@ -37,9 +37,6 @@ public class MarketDataService {
 		System.out.println("Parametro 'price' aggiornato per tutte le istanze di MarketData...");
 	}
 
-//	public List<MarketData>getAllMarketData()() {
-//		return marketDataRepository.findAll();
-//	}
 	public Page<MarketData> getAllMarketData(int page, String sort) {
 		Pageable pageable = PageRequest.of(page, 20, Sort.by(sort));
 		return marketDataRepository.findAll(pageable);
@@ -49,10 +46,5 @@ public class MarketDataService {
 	public MarketData findById(UUID id) throws NotFoundException {
 		return marketDataRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
 	}
-
-//	public Page<MarketData> findAll(int page, String sort) {
-//		Pageable pageable = PageRequest.of(page, 10, Sort.by(sort));
-//		return tR.findAll(pageable);
-//	}
 
 }

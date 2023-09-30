@@ -82,15 +82,7 @@
 //		}
 //	}
 //
-////	List<HistoricalPrice> historicalPrices = hPR.findAll();
-////
-////	for(int i = 0;i<200;i++) {
-////		HistoricalPrice historicalPrice = new HistoricalPrice();
-////		historicalPrice.setDateTime(LocalDateTime.now().minusDays(i));
-////historicalPrice.setMarketData(marketData);
-////		
-////
-////	
+//
 ////	}
 ////
 //

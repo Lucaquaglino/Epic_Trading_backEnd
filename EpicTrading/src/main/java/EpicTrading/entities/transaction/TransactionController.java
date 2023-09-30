@@ -29,14 +29,9 @@ public class TransactionController {
 
 	@GetMapping("")
 	public Page<Transaction> findAll(@RequestParam(defaultValue = "0") int page,
-			@RequestParam(defaultValue = "id") String order) {
+			@RequestParam(defaultValue = "timeStamp") String order) {
 		return tS.findAll(page, order);
 	}
-
-//	@GetMapping("")
-//	public List<Transaction> getTransactions() {
-//		return tS.getAllTransactions();
-//	}
 
 	@GetMapping("/{userId}")
 	public Page<Transaction> findByUserId(@RequestParam(defaultValue = "0") int page,

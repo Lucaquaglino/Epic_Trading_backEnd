@@ -35,16 +35,5 @@ public class OrderController {
 	public Order findById(@PathVariable UUID orderId) {
 		return oS.getOrderById(orderId);
 	}
-//
-//	@PutMapping("/{userId}")
-//	public User updateUser(@PathVariable UUID userId, @RequestBody NewUserPayload body) {
-//		return oS.findByIdAndUpdate(userId, body);
-//	}
-
-//	@DeleteMapping("/{userId}")
-//	@ResponseStatus(HttpStatus.NO_CONTENT)
-//	public void deleteUser(@PathVariable UUID userId) {
-//		oS.(userId);
-//	}
 
 }

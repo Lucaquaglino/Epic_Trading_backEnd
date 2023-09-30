@@ -18,11 +18,6 @@ public class PortfolioStockService {
 	@Autowired
 	private PortfolioStockRepository pR;
 
-//	public Page<PortfolioStock> findAll(int page, String sort) {
-//		Pageable pageable = PageRequest.of(page, 20, Sort.by(sort));
-//		return pR.findAll(pageable);
-//	}
-
 	public Page<PortfolioStock> findByUserId(int page, String sort, UUID userId) {
 		Pageable pageable = PageRequest.of(page, 60, Sort.by(sort));
 		return pR.findByUserId(userId, pageable);
@@ -31,10 +26,6 @@ public class PortfolioStockService {
 	public PortfolioStock findById(UUID id) throws NotFoundException {
 		return pR.findById(id).orElseThrow(() -> new NotFoundException(id));
 	}
-
-//	public PortfolioStock findByMarketDataIdAndUserId(UUID marketDataId, UUID userId) {
-//		return pR.findByMarketDataIdAndIdUser(marketDataId, userId);
-//	}
 
 	public PortfolioStock findByMarketDataIdAndUserIdAndTimestamp(UUID marketDataId, UUID userId,
 			LocalDateTime timestamp) {

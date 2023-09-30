@@ -17,12 +17,6 @@ public class PortfolioStockController {
 	@Autowired
 	private PortfolioStockService pS;
 
-//	@GetMapping("")
-//	public Page<PortfolioStock> findAll(@RequestParam(defaultValue = "0") int page,
-//			@RequestParam(defaultValue = "id") String order) {
-//		return pS.findAll(page, order);
-//	}
-
 	@GetMapping("/{userId}")
 	public Page<PortfolioStock> findByUserId(@RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "id") String order, @PathVariable UUID userId) {

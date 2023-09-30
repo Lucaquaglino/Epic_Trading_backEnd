@@ -63,17 +63,6 @@ public class UserService {
 		return uR.save(user);
 	}
 
-	// PRENDI L'ID DELL'UTENTE LOGGATO
-//	public User getCurrentUser() {
-//		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//		String currentUserName = authentication.getName();
-//		List<User> users = uR.findUsersByName(currentUserName);
-//		if (users.isEmpty()) {
-//			throw new NotFoundException("Utente con nome " + currentUserName + " non trovato");
-//		}
-//		return users.get(0); // Restituisci il primo utente trovato (potrebbe esserci solo uno)
-//	}
-
 	public User getCurrentUser() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		Object principal = authentication.getPrincipal();
